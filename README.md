@@ -18,10 +18,6 @@ Or install it yourself as:
 
     $ gem install ftpro
 
-Or include it in your project's Gemfile
-
-    $ gem ‘ftpro’
-
 ## Usage
 
 This gem provide a ruby class `Ftpro`, you can use it like `Net::FTP`:
