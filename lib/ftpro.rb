@@ -4,20 +4,24 @@ class Ftpro < Net::FTP
 
   ## Net::FTP extension
 
-  def nlst_a(dir)
-    ## Function like nlst and also show hide files
+  ## Function like nlst and also show hide files
+  def nlst_a(dir = nil)
     cmd = "NLST -a"
+    rule_out1, rule_out2 =
+      dir.nil? ? [".", ".."] : ["/.", "/.."]
     if dir
       cmd = cmd + " " + dir
     end
     files = []
     retrlines(cmd) do |line|
-      files.push(line) if !line.end_with?("/.", "/..")
+      files.push(line) if !line.end_with?(rule_out1, rule_out2)
     end
     return files
   end
 
   ## File function mirror
+
+  ## Check if dir is a directory type
   def directory?(dir)
     current_dir = pwd
     begin
@@ -30,10 +34,12 @@ class Ftpro < Net::FTP
     end
   end
 
+  ## Check if file_path is a file type
   def file?(file_path)
     nlst(file_path)[0] == file_path
   end
 
+  ## Check if dir exist
   def exist?(dir)
     return true if !nlst(dir).empty? ## File or not empty directory
     ## Check if a empty directory
@@ -50,8 +56,8 @@ class Ftpro < Net::FTP
     return new_dir if exist?(new_dir)
   end
 
+  ## Upload local directory to ftp server with local directory name
   def put_r(local_dir, remote_dir)
-    ## Upload local directory to ftp server with local directory name
     return false if !File.directory?(local_dir)
     upload_dir(local_dir, remote_dir)
   end
