@@ -90,7 +90,8 @@ class Ftpro < Net::FTP
     end
 
     def upload_dir(local_dir, remote_dir)
-      remote_new_dir = "#{remote_dir}/#{local_dir.split('/')[-1]}"
+      remote_folder = local_dir.split('/')[-1] == ".." ? "" : local_dir.split('/')[-1] ## check if folder name is return symbol
+      remote_new_dir = "#{remote_dir}/#{remote_folder}"
       mkdir_p(remote_new_dir)  ## init remote dir
       Dir.foreach(local_dir) do |file|
         if file != "." && file != ".."
