@@ -4,11 +4,11 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "ftpro"
-  spec.version       = '0.0.1'
+  spec.version       = '0.0.2'
   spec.authors       = ["dddd1919"]
   spec.email         = ["dingrank@gmail.com"]
-  spec.summary       = %q{"The enhanced version of net/ftp"}
-  spec.description   = %q{"Provide all net/ftp method and some additional functionality"}
+  spec.summary       = %q{The enhanced version of net/ftp}
+  spec.description   = %q{Provide all net/ftp method and some additional functionality}
   spec.homepage      = "https://github.com/dddd1919/ftpro"
   spec.license       = "MIT"
 
